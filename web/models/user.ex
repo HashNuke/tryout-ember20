@@ -1,8 +1,13 @@
 defmodule Blog.User do
   use Blog.Web, :model
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key :binary_id
+
   schema "users" do
     field :name, :string
+
+    has_many :posts, Post
 
     timestamps
   end

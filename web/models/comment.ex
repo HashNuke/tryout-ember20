@@ -1,8 +1,13 @@
 defmodule Blog.Comment do
   use Blog.Web, :model
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key :binary_id
+
   schema "comment" do
     field :body, :string
+
+    belongs_to :post, Post
 
     timestamps
   end
