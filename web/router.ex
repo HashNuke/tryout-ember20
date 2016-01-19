@@ -14,14 +14,16 @@ defmodule Blog.Router do
   end
 
   scope "/", Blog do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :api # Use the default browser stack
 
-    get "/", PageController, :index
-
-    resources "/users", UserController, only: [:get]
-    resources "/posts", PostController, only: [:get] do
+    resources "/users",  UserController, only: [:index, :show] do
+      resources "posts", PostController, only: [:index]
+    end
+    resources "/posts", PostController, only: [:show] do
       resources "/comments", CommentController, only: [:get]
     end
+
+    get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
