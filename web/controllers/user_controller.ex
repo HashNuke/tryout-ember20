@@ -4,7 +4,20 @@ defmodule Blog.UserController do
   alias Blog.Repo
 
   def index(conn, params) do
-    #TODO
+    users = Repo.all(Blog.User)
+    |> Enum.map(&format_user/1)
+
+    json conn, %{data: users}
   end
 
+
+  defp format_user(user) do
+    %{
+      type: "user",
+      id: user.id,
+      attributes: %{
+        name: user.name
+      }
+    }
+  end
 end

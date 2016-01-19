@@ -18,9 +18,9 @@ defmodule Blog.Router do
 
     get "/", PageController, :index
 
-    resources "users", UserController, only: [:get]
-    resources "posts", PostController, only: [:get] do
-      resources "comments", CommentController, only: [:get]
+    resources "/users", UserController, only: [:get]
+    resources "/posts", PostController, only: [:get] do
+      resources "/comments", CommentController, only: [:get]
     end
   end
 
