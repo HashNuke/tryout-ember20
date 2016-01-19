@@ -1,10 +1,7 @@
 defmodule Blog.Comment do
   use Blog.Web, :model
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key :binary_id
-
-  schema "comment" do
+  schema "comments" do
     field :body, :string
 
     belongs_to :post, Post
