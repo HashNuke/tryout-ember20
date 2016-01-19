@@ -18,14 +18,14 @@ defmodule Blog.PostController do
       links: %{
         self: "/users/#{opts[:user_id]}/posts"
       },
-      data: Enum.map(items, &format_item/1)
+      data: Enum.map(items, &(format_item &1, opts))
     }
 
     json conn, formatted
   end
 
 
-  defp format_item(item) do
+  defp format_item(item, opts \\ []) do
     %{
       type: "post",
       id: item.id,
@@ -37,6 +37,11 @@ defmodule Blog.PostController do
         posts: %{
           links: %{
             self: "/posts/#{item.id}"
+          }
+        },
+        user: %{
+          links: %{
+            self: "/users/#{opts[:user_id]}"
           }
         }
       }
