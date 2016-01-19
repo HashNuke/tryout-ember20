@@ -38,7 +38,7 @@ num_range = 1..4
 Repo.all(Post)
 |> Enum.map(fn(post)->
   Enum.map(num_range, fn(i)->
-    Comment.changeset(%Comment{}, %{body: "Comment##{i} for #{post.title}"})
+    Comment.changeset(%Comment{}, %{body: "Comment##{i} for #{post.title}", post_id: post.id})
     |> Repo.insert
   end)
 end)

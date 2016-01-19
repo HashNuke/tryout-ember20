@@ -20,7 +20,7 @@ defmodule Blog.Router do
       resources "posts", PostController, only: [:index]
     end
     resources "/posts", PostController, only: [:show] do
-      resources "/comments", CommentController, only: [:get]
+      resources "/comments", CommentController, only: [:index]
     end
 
     get "/", PageController, :index

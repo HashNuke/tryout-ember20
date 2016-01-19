@@ -19,12 +19,29 @@ defmodule Blog.PostController do
   end
 
 
-  defp json_api(conn, items, opts \\ []) when is_list(items) do
+  defp json_api(conn, items) do
+    json_api conn, items
+  end
+
+
+  defp json_api(conn, items, opts) when is_list(items) do
     formatted = %{
       links: %{
         self: "/users/#{opts[:user_id]}/posts"
       },
       data: Enum.map(items, &(format_item &1, opts))
+    }
+
+    json conn, formatted
+  end
+
+
+  defp json_api(conn, item, opts) do
+    formatted = %{
+      links: %{
+        self: "/posts/#{item.id}"
+      },
+      data: format_item(item)
     }
 
     json conn, formatted
@@ -40,9 +57,9 @@ defmodule Blog.PostController do
         body: item.body
       },
       relationships: %{
-        posts: %{
+        comments: %{
           links: %{
-            self: "/posts/#{item.id}"
+            self: "/posts/#{item.id}/comments"
           }
         },
         user: %{

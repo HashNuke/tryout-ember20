@@ -9,7 +9,7 @@ defmodule Blog.Comment do
     timestamps
   end
 
-  @required_fields ~w(body)
+  @required_fields ~w(body post_id)
   @optional_fields ~w()
 
   @doc """
