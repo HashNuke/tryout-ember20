@@ -13,6 +13,12 @@ defmodule Blog.PostController do
   end
 
 
+  def show(conn, params) do
+    post = Repo.get Blog.Post, params["id"]
+    json_api conn, post
+  end
+
+
   defp json_api(conn, items, opts \\ []) when is_list(items) do
     formatted = %{
       links: %{
